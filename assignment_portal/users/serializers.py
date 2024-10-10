@@ -2,7 +2,11 @@
 from rest_framework import serializers as drf_serializers
 from rest_framework_mongoengine import serializers
 from .models import User
+from rest_framework_mongoengine.serializers import DocumentSerializer  # Corrected import
+
 from django.contrib.auth.hashers import make_password
+
+  # Import DocumentSerializer
 
 class RegisterSerializer(serializers.DocumentSerializer):
     password = drf_serializers.CharField(write_only=True, required=True, min_length=8)
@@ -37,6 +41,13 @@ class RegisterSerializer(serializers.DocumentSerializer):
 class LoginSerializer(drf_serializers.Serializer):
     email = drf_serializers.EmailField(required=True)
     password = drf_serializers.CharField(write_only=True, required=True)
+
+
+class UserSerializer(DocumentSerializer):  # Use DocumentSerializer instead of ModelSerializer
+    class Meta:
+        model = User
+        fields = ['id','first_name','last_name', 'email']  # Add any other fields you want to expose
+
 
 # class AssignmentSerializer(serializers.DocumentSerializer):
 #     admin = drf_serializers.StringRelatedField()

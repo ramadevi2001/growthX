@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from .serializers import AssignmentSerializer, CreateAssignmentSerializer
 from .models import Assignment
 from users.models import User
+from users.serializers import UserSerializer  # Add this import for UserSerializer
 from rest_framework.permissions import IsAuthenticated  # Import DRF's IsAuthenticated
 from .authentication import CustomJWTAuthentication  # Import your custom authentication class
 from .permissions import IsAdmin
@@ -77,3 +78,16 @@ def reject_assignment(request, pk):
     assignment.status = 'rejected'
     assignment.save()
     return Response({"message": "Assignment rejected."}, status=status.HTTP_200_OK)
+
+
+class AllAdminsView(generics.ListAPIView):
+    """
+    View to return a list of all admin users.
+    """
+    serializer_class = UserSerializer
+    authentication_classes = [CustomJWTAuthentication]
+    permission_classes = [IsAuthenticated,IsAdmin]
+
+    def get_queryset(self):
+        # Return only admin users
+        return User.objects.filter(role='admin')
