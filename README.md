@@ -38,7 +38,8 @@ connect(
    2. Go the postman import this collection [https://api.postman.com/collections/34747528-14531f1c-b3a6-4a8c-92af-d22df0509cd3?access_key=PMAT-01J9X61J0XS7MTRCFRZYW2HXY5]
    3. create enviroment postman with variables BaseUrl as `http://127.0.0.1:8000`, token value you can steup when you logged in
 
-   4. call the create API You will get the result following image<img width="946" alt="image" src="https://github.com/user-attachments/assets/5cc58ae5-bd61-4d65-ac29-783d7087cda2">
+   4. call the create API You will get the result following image![image](https://github.com/user-attachments/assets/1fbb5f43-ceab-46bb-be0e-2512ac4971fc)
+
    5. Congrats your backend setup for this project is done.
 
 
