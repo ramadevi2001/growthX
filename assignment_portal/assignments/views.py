@@ -9,7 +9,7 @@ from users.models import User
 from users.serializers import UserSerializer  # Add this import for UserSerializer
 from rest_framework.permissions import IsAuthenticated  # Import DRF's IsAuthenticated
 from .authentication import CustomJWTAuthentication  # Import your custom authentication class
-from .permissions import IsAdmin
+from .permissions import IsAdmin,IsUser
 from mongoengine.errors import DoesNotExist
 
 class UploadAssignmentView(generics.CreateAPIView):
@@ -17,8 +17,8 @@ class UploadAssignmentView(generics.CreateAPIView):
     Endpoint for users to upload assignments.
     """
     serializer_class = CreateAssignmentSerializer
-    # authentication_classes = [CustomJWTAuthentication]  # Set custom authentication
-    # permission_classes = [IsAuthenticated]  # Use DRF's permission class
+    authentication_classes = [CustomJWTAuthentication]  # Set custom authentication
+    permission_classes = [IsAuthenticated,IsUser]  # Use DRF's permission class
 
     def perform_create(self, serializer):
         # Associate the assignment with the authenticated user
