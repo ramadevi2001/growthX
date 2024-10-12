@@ -86,7 +86,7 @@ class AllAdminsView(generics.ListAPIView):
     """
     serializer_class = UserSerializer
     authentication_classes = [CustomJWTAuthentication]
-    permission_classes = [IsAuthenticated,IsAdmin]
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         # Return only admin users
